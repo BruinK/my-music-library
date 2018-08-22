@@ -1,0 +1,23 @@
+.myMusic{
+    height: auto;
+}
+.myMusic .myMusicTitle{
+    height: 50px;
+    width: 95%;
+    font-family:PingFangSC-Semibold;
+    margin: 0 auto;
+    border-bottom: 0.5px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.myMusic .myMusicTitle .mainTitle{
+    font-size:20px;
+    color:#333;
+    margin: 0 15px;
+}
+.myMusic .myMusicTitle .wish{
+    color: #666;
+    font-size: 12px;
+    margin: 0 15px;
+}

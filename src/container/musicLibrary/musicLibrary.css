@@ -1,0 +1,10 @@
+.App {
+    height: 100%;
+    width: 100%;
+}
+
+.App .header {
+    width: 100%;
+    height: 46px;
+    /* background: #bbb; */
+}

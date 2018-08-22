@@ -1,0 +1,66 @@
+.tabs {
+    width: 100%;
+    height: 100%;
+}
+
+.tabs .panelTitleBox {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 0.1px solid #bbb;
+}
+
+.tabs .panelTitleBox .itemTitleBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabs .panelTitleBox .itemTitleBox>img{
+    height: 30px;
+    width: 30px;
+}
+
+.tabs .panelTitleBox .tab_title {
+    font-size: 15px;
+    font-family: 'Miscrosoft Yahei';
+    color: #aaa;
+    text-align:center;
+}
+
+.tabs .panelTitleBox .tab_title:hover{
+    cursor: pointer;
+}
+.tabs .panelTitleBox .active{
+    position: relative;
+    color: #ff2064;
+}
+.tabs .panelTitleBox .active:after {
+    position: absolute;
+    display: block;
+    content: '';
+    height: 4px;
+    width: 40px;
+    margin-top: 5px;
+    border: 1px solid #ff2064;
+    border-radius: 4px;
+    background: #ff2064;
+}
+.tabs .panelContentBox{
+    height: 90%;
+    width: 100%;
+    /* background: #ade; */
+}
+
+.tabs .panelContentBox .tab_item{
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+
+.tabs .panelContentBox .show {
+    display: block;
+}
+

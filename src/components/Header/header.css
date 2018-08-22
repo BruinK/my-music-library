@@ -1,0 +1,39 @@
+.Header{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;    
+    font-family:PingFangSC-Regular;
+}
+
+.Header .headerBack{
+    width: 85px;
+    display: flex;
+    margin: 0 10px;
+    justify-content: safe;
+    align-items: center;
+}
+.Header .headerBack>img{
+    height: 18px;
+    width: 11px;
+}
+.Header .headerBack>span{
+    line-height: 18px;
+    font-size:16px;
+    color:#ff2064;
+    margin: 0 5px;
+}
+
+.Header .headerTitle{
+    font-size:17px;
+    color:#333;
+    margin: 0 auto;
+    /* text-align:left; */
+}
+.Header .headerFinish{
+    width: 85px;
+    font-size:16px;
+    text-align: right;
+    color:#ff2064;
+    margin: 0 15px;
+}
