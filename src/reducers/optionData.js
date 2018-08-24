@@ -24,6 +24,12 @@ export default function optionData(state = dataList, action) {
         recommendListIdx: [...action.response.result]
       };
     }
+    case ActionTypes.ADDOPTIONMUSIC: {
+      return {
+        ...state,
+        optionMusicOrder: action.id
+      };
+    }
     default:
       return state;
   }

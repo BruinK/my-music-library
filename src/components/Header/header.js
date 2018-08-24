@@ -10,17 +10,24 @@ export default class Header extends Component {
     finishSelect=() => {
       console.log('点击完成');
     }
-    render() {
+    showTitle=() => {
       const { personInfo } = this.props;
+      if (personInfo.length === 0) return null;
+      return (
+        <div className="headerTitle">
+          {personInfo[0].nick}
+        </div>);
+    }
+    render() {
       return (
         <div className="Header">
           <div className="headerBack" onClick={this.goBack}>
             <img src={IMG.returnIcon} alt="goback" />
             <span>{TXT.HEADERLEFT}</span>
           </div>
-          <div className="headerTitle">
-            {personInfo.nick}
-          </div>
+          {
+            this.showTitle()
+          }
           <div className="headerFinish" onClick={this.finishSelect}>
             {TXT.HEADERRIGHT}
           </div>

@@ -1,6 +1,7 @@
 
 .checkBox{
    display: flex;
+   height: 60px;
 }
 .checkBox .checkboxItem{
      width: 60px;

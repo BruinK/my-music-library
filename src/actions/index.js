@@ -2,6 +2,26 @@ import { normalize } from 'normalizr';
 import * as schemas from '../schema/index';
 import * as ActionTypes from '../const/ActionTypes';
 
+export function showToolBar() {
+  return {
+    type: ActionTypes.SHOWTOOLBAR
+  };
+}
+
+export function addOptionMusic(id) {
+  return {
+    type: ActionTypes.ADDOPTIONMUSIC,
+    id
+  };
+}
+
+export function addToolId(id) {
+  return {
+    type: ActionTypes.ADDTOOLID,
+    id
+  };
+}
+
 export function login(mid) {
   return {
     SERVER_API: {

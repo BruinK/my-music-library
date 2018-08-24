@@ -26,3 +26,19 @@ export const shareGray = require('./image/button_share_gray.png');
 
 export const deleteActive = require('./image/button_delete.png');
 export const deleteGray = require('./image/button_delete_gray.png');
+
+// cut image
+export const btnPause = require('./image/btn_pause.png');
+export const btnPlay = require('./image/btn_play.png');
+
+export const cutStart = require('./image/cut_music_start.png');
+export const cutFinish = require('./image/cut_music_finish.png');
+
+export const btnCutStart = require('./image/button_cut_music_start.png');
+export const btnCutStartGray = require('./image/button_cut_music_start_gray.png');
+
+export const btnCutFinish = require('./image/button_cut_music_finish.png');
+export const btnCutFinishGray = require('./image/button_cut_music_finish_gray.png');
+
+export const btnCutClear = require('./image/button_cut_music_clear.png');
+export const btnCutClearGray = require('./image/button_cut_music_clear_gray.png');

@@ -2,14 +2,25 @@ import React, { Component } from 'react';
 import CheckBox from '../checkBox/checkBox';
 import './myMusic.css';
 import CheckList from '../checkList/checkList';
+import Toolbar from '../toolBar/toolBar';
 import * as TXT from '../../const/ActionTypes';
 
 export default class MyMusic extends Component {
-  callback = key => {
-    console.log(key);
+  myListCallBack = key => {
+    const { actions } = this.props;
+    actions.addOptionMusic(key);
   }
+  recommendListCallBack = key => {
+    console.log('recommendListCallBack', key);
+  }
+  showToolId = id => {
+    const { actions } = this.props;
+    actions.addToolId(id);
+    console.log(id);
+  }
+
   render() {
-    const { myList, recommendList } = this.props;
+    const { myList, recommendList, showUi } = this.props;
     return (
       <div className="myMusic">
         <CheckBox defaultActiveKey={0} onChange={this.callback}>
@@ -25,7 +36,8 @@ export default class MyMusic extends Component {
           </div>
         </div>
         <div className="musicList">
-          <CheckList dataSource={myList} multiple startOrder={0} />
+          {/* <CheckList dataSource={myList} multiple startOrder={0} onChange={this.callback} /> */}
+          <CheckList dataSource={myList} onChange={this.myListCallBack} />
         </div>
         <div className="myMusicTitle">
           <div className="mainTitle">
@@ -33,8 +45,9 @@ export default class MyMusic extends Component {
           </div>
         </div>
         <div className="musicList">
-          <CheckList dataSource={recommendList} multiple startOrder={0} />
+          <CheckList dataSource={recommendList} startOrder={0} onChange={this.recommendListCallBack} />
         </div>
+        <Toolbar showUi={showUi} onClick={this.showToolId} />
       </div>
     );
   }

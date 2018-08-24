@@ -1,4 +1,54 @@
 .checkList{
     width: 100%;
     height: auto;
+    padding-bottom: 15px;
+}
+.checkList >h5{
+    margin: 10px 5%;
+}
+
+.checkList .checkListItem{
+    height: 50px;
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.checkList .checkListItem .listCheckPoint {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #ffffee;
+    margin: 0 15px;
+}
+
+.checkList .checkListItem .listChecked{
+    background-color: #ffffee;
+    background-image:  url('../../resource/image/select_music.png');
+    background-repeat:  no-repeat;
+    background-size: 16px 16px;
+}
+
+.checkList .checkListItem .multiplePoint{
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #f8f8f8;
+    margin: 0 15px;
+}
+.checkList .checkListItem .multipleChecked{
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    background: #ff2064;
+    line-height: 16px;
+}
+
+.checkList .checkListItem .checkListContent{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#333;
+    text-align:left;
 }
