@@ -25,9 +25,44 @@ export default function optionData(state = dataList, action) {
       };
     }
     case ActionTypes.ADDOPTIONMUSIC: {
+      const newState = { ...state };
+      let activeTemp = [];
+      // 如果kind为1 来自myList 2 来自recommendList
+      if (action.kind === 1) {
+        const orderTem = newState.myListIdx[action.id];
+        if (newState.myList[orderTem].plp) {
+          activeTemp = [0, 2, 3, 4];
+        } else {
+          activeTemp = [0, 1, 2, 3, 4];
+        }
+        return {
+          ...state,
+          optionMusicOrder: newState.myListIdx[action.id],
+          optionNusicKind: action.kind,
+          activeToolList: [...activeTemp]
+        };
+      }
+      if (action.kind === 2) {
+        return {
+          ...state,
+          optionMusicOrder: newState.recommendListIdx[action.id],
+          optionNusicKind: action.kind,
+          activeToolList: [0]
+        };
+      }
+      return state;
+    }
+    case ActionTypes.STORECUTINFO: {
       return {
         ...state,
-        optionMusicOrder: action.id
+        myList: {
+          ...state.myList,
+          [action.id]: {
+            ...state.myList[action.id],
+            bmt: action.bmt,
+            emt: action.emt
+          }
+        }
       };
     }
     default:

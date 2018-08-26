@@ -2,6 +2,8 @@ import * as IMG from '../resource/exportImg';
 
 export const dataList = {
   optionMusicOrder: -1,
+  optionsMusicKind: -1,
+
   personInfo: {},
   personInfoIdx: [],
 
@@ -9,10 +11,13 @@ export const dataList = {
   myListIdx: [],
 
   recommendList: [],
-  recommendListIdx: []
+  recommendListIdx: [],
+  activeToolList: []
+
 };
 export const uiList = {
   currentToolId: -1,
+  isMultiple: 0,
   ui: [
     {
       id: 1, name: '播放', activeIcon: [IMG.playActive], grayIcon: [IMG.playGray]
@@ -29,7 +34,9 @@ export const uiList = {
     {
       id: 5, name: '删除', activeIcon: [IMG.deleteActive], grayIcon: [IMG.deleteGray]
     }
-  ],
-  activeIdx: [0, 1, 2, 3, 4]
+  ]
+  // activeIdx: []
+  // activeIdx: [0, 1, 2, 3, 4]
+
 };
 

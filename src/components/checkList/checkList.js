@@ -10,9 +10,10 @@ export default class CheckList extends Component {
       checked: []
     };
   }
-  componentWillMount() {
+  componentDidMount() {
+    console.log('​CheckList -> componentDidMount -> componentDidMount');
     this.setState({
-      order: this.props.startOrder
+      order: parseInt(this.props.startOrder, 10)
     });
   }
   check_list_index = (index, type) => {
@@ -33,17 +34,24 @@ export default class CheckList extends Component {
     callback = index => {
       if (this.props.onChange) {
         this.props.onChange(index);
-        const tempList = [...this.state.checked];
-        const markTemp = tempList.indexOf(index);
-        if (markTemp === (-1)) {
-          tempList.push(index);
+        if (this.props.multiple) {
+          const tempList = [...this.state.checked];
+          const markTemp = tempList.indexOf(index);
+          if (markTemp === (-1)) {
+            tempList.push(index);
+          } else {
+            tempList.splice(markTemp, 1);
+          }
+          this.setState({
+            currentIndex: index,
+            checked: [...tempList]
+          });
         } else {
-          tempList.splice(markTemp, 1);
+          this.setState({
+            currentIndex: index,
+            checked: [index]
+          });
         }
-        this.setState({
-          currentIndex: index,
-          checked: [...tempList]
-        });
       }
     }
     isMultiple = index => {
@@ -72,9 +80,16 @@ export default class CheckList extends Component {
           </div>
         </div>));
     }
+    handelMouseLeave =() => {
+      if (!this.props.multiple) {
+        this.setState({
+          currentIndex: -1
+        });
+      }
+    }
     render() {
       return (
-        <div className="checkList">
+        <div className="checkList" onMouseLeave={this.handelMouseLeave}>
           {
             this.showList()
           }

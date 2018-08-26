@@ -7,11 +7,25 @@ import * as TXT from '../../const/ActionTypes';
 
 export default class MyMusic extends Component {
   myListCallBack = key => {
+    console.log('​MyMusic -> key', key);
     const { actions } = this.props;
-    actions.addOptionMusic(key);
+    actions.addOptionMusic(key, 1);
   }
   recommendListCallBack = key => {
-    console.log('recommendListCallBack', key);
+    console.log('​MyMusic -> key', key);
+    const { actions } = this.props;
+    actions.addOptionMusic(key, 2);
+  }
+
+  myListMultipleCallBack =key => {
+    console.log('​MyMusic -> key', key);
+  }
+  recommendListMultipleCallBack =key => {
+    console.log('​MyMusic -> key', key);
+  }
+  checkBoxCallBack = key => {
+    const { actions } = this.props;
+    actions.changeMultipleMark(key);
   }
   showToolId = id => {
     const { actions } = this.props;
@@ -19,11 +33,32 @@ export default class MyMusic extends Component {
     console.log(id);
   }
 
-  render() {
+  showCheckList =type => {
     const { myList, recommendList, showUi } = this.props;
+    if (type === 'M') {
+      if (showUi.isMultiple === 0) {
+        return <CheckList dataSource={myList} startOrder={0} onChange={this.myListCallBack} />;
+      }
+      if (showUi.isMultiple === 1) {
+        return <CheckList dataSource={myList} multiple startOrder={0} onChange={this.myListMultipleCallBack} />;
+      }
+    }
+    if (type === 'R') {
+      if (showUi.isMultiple === 0) {
+        return <CheckList dataSource={recommendList} startOrder={0} onChange={this.recommendListCallBack} />;
+      }
+      if (showUi.isMultiple === 1) {
+        return <CheckList dataSource={recommendList} multiple startOrder={0} onChange={this.recommendListMultipleCallBack} />;
+      }
+    }
+    return null;
+  }
+
+  render() {
+    const { showUi } = this.props;
     return (
       <div className="myMusic">
-        <CheckBox defaultActiveKey={0} onChange={this.callback}>
+        <CheckBox defaultActiveKey={0} onChange={this.checkBoxCallBack}>
           <div name="单选" key="1" />
           <div name="多选" key="2" />
         </CheckBox>
@@ -36,8 +71,9 @@ export default class MyMusic extends Component {
           </div>
         </div>
         <div className="musicList">
-          {/* <CheckList dataSource={myList} multiple startOrder={0} onChange={this.callback} /> */}
-          <CheckList dataSource={myList} onChange={this.myListCallBack} />
+          {
+            this.showCheckList('M')
+          }
         </div>
         <div className="myMusicTitle">
           <div className="mainTitle">
@@ -45,7 +81,9 @@ export default class MyMusic extends Component {
           </div>
         </div>
         <div className="musicList">
-          <CheckList dataSource={recommendList} startOrder={0} onChange={this.recommendListCallBack} />
+          {
+            this.showCheckList('R')
+          }
         </div>
         <Toolbar showUi={showUi} onClick={this.showToolId} />
       </div>

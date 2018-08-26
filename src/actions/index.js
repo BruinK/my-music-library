@@ -8,10 +8,26 @@ export function showToolBar() {
   };
 }
 
-export function addOptionMusic(id) {
+export function changeMultipleMark(kind) {
+  return {
+    type: ActionTypes.CHANGEMULTIPLEMARK,
+    kind
+  };
+}
+export function storeCutInfo(bmt, emt, id) {
+  return {
+    type: ActionTypes.STORECUTINFO,
+    bmt,
+    emt,
+    id
+  };
+}
+
+export function addOptionMusic(id, kind) {
   return {
     type: ActionTypes.ADDOPTIONMUSIC,
-    id
+    id,
+    kind
   };
 }
 
@@ -30,7 +46,8 @@ export function login(mid) {
       params: {
         mid
       },
-      normailzerFun: response => normalize(response.data, schemas.PERSONINFO)
+      normailzerFun: response => normalize(response.data, schemas.PERSONINFO),
+      OWN: true
     }
   };
 }

@@ -14,10 +14,11 @@ import * as TXT from '../../const/ActionTypes';
 
 class MusicLibrary extends Component {
   componentDidMount() {
-    const { actions } = this.props;
+    const { actions, personInfo } = this.props;
+    console.log('​MusicLibrary -> componentDidMount -> personInfo', personInfo);
     actions.login(105);
-    actions.fetchMyList('test83223');
-    actions.fetchRecommendList('test83223');
+    actions.fetchMyList(personInfo.token);
+    actions.fetchRecommendList(personInfo.token);
   }
   callback = key => {
     console.log(key);
@@ -26,12 +27,22 @@ class MusicLibrary extends Component {
       const {
         optionMusicOrder, myList, currentToolId, actions
       } = this.props;
+      let listTemp = [];
+      if (myList.length !== 0) {
+        listTemp = myList.filter(item => item.id === optionMusicOrder);
+      }
       if (optionMusicOrder !== -1 && currentToolId !== -1) {
         if (currentToolId === 0) {
           return <PlayMusic />;
         }
         if (currentToolId === 3) {
-          return <CutTool myList={myList[optionMusicOrder]} actions={actions} />;
+          if (listTemp.length !== 0) {
+            return (<CutTool
+              myList={listTemp.pop()}
+              id={optionMusicOrder}
+              actions={actions}
+            />);
+          }
         }
       }
       return null;
@@ -40,7 +51,6 @@ class MusicLibrary extends Component {
       const {
         personInfo, myList, recommendList, showUi, actions
       } = this.props;
-      console.log('​MusicLibrary -> render -> showUi', showUi);
 
       return (
         <div className="App">
@@ -78,14 +88,18 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   const {
-    personInfo, personInfoIdx, myList, myListIdx, recommendList, recommendListIdx, optionMusicOrder
+    personInfo, personInfoIdx, myList, myListIdx, recommendList, recommendListIdx, optionMusicOrder, activeToolList
   } = state.optionData;
-  const { ui, activeIdx, currentToolId } = state.showUi;
+  const { ui, currentToolId, isMultiple } = state.showUi;
   return {
     personInfo: combineList(personInfo, personInfoIdx),
     myList: combineList(myList, myListIdx),
     recommendList: combineList(recommendList, recommendListIdx),
-    showUi: { ui, activeIdx },
+    showUi: {
+      ui,
+      activeIdx: activeToolList,
+      isMultiple
+    },
     currentToolId,
     optionMusicOrder
   };

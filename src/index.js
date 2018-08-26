@@ -9,12 +9,13 @@ import App from './App';
 import rootReducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 import serverApi from './middleware/serverApi';
+import checkToken from './middleware/checkToken';
 import MusicLibrary from './container/musicLibrary/musicLibrary';
 
 const logger = createLogger();
 const store = createStore(
   rootReducer,
-  compose(applyMiddleware(serverApi, logger))
+  compose(applyMiddleware(checkToken, serverApi, logger))
 );
 
 const routes = [{

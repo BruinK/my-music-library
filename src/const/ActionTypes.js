@@ -10,10 +10,16 @@ export const FETCHRECOMMENDLIST_SUC = 'FETCHRECOMMENDLIST_SUC';
 
 export const SHOWTOOLBAR = 'SHOWTOOLBAR';
 
+export const STORECUTINFO = 'STORECUTINFO';
+
 // option music list
 export const ADDOPTIONMUSIC = 'ADDOPTIONMUSIC';
 
 export const ADDTOOLID = 'ADDTOOLID';
+
+// ui
+export const CHANGEMULTIPLEMARK = 'CHANGEMULTIPLEMARK';
+
 // my music
 export const MYMUSICTITLE = '我的音乐';
 export const RECOMMENDTITLE = '推荐音乐';

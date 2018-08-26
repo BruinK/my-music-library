@@ -24,7 +24,7 @@ export default store => next => action => {
     throw new Error('params shoudle be a object');
   }
 
-  const { normailzerFun } = action.SERVER_API;
+  const { normailzerFun, callBackArgument } = action.SERVER_API;
 
   next({
     type: `${type}_REQ`
@@ -34,6 +34,8 @@ export default store => next => action => {
     .then(res => {
         // console.log('中间件1',res.data)
       const response = typeof (normailzerFun) !== 'undefined' ? normailzerFun(res.data) : res.data;
+      if (typeof (callBackArgument) !== 'undefined') {
+        callBackArgument(res.data)}
         // console.log('中间件2', response)
       next({
         type: `${type}_SUC`,

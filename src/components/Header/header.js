@@ -12,7 +12,11 @@ export default class Header extends Component {
     }
     showTitle=() => {
       const { personInfo } = this.props;
-      if (personInfo.length === 0) return null;
+      if (personInfo.length === 0) {
+        return (
+          <div className="headerTitle" >...加载中</div>
+        );
+      }
       return (
         <div className="headerTitle">
           {personInfo[0].nick}
