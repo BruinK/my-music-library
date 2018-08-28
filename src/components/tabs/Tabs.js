@@ -29,7 +29,6 @@ export default class Tabs extends Component {
     return <img src={item.props.icon} alt="icon" />;
   }
     showPanelTitle=() =>
-      // console.log('sss', this.props.children);
       this.props.children.map((element, idx) => (
         <div className="itemTitleBox" key={idx}>
           {
@@ -46,7 +45,6 @@ export default class Tabs extends Component {
       ))
 
     showPanelConten=() =>
-      // console.log('fff', this.props.children);
       this.props.children.map((element, idx) => (
         <div className={this.check_item_index(idx)} key={idx}>{ element }</div>
       ))

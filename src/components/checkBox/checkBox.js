@@ -23,7 +23,6 @@ export default class CheckBox extends Component {
   check_item_index = index => (index === this.state.currentIndex ? 'pointer checked' : 'pointer')
 
     showCheckItem=() =>
-    //   console.log(this.props.children);
       this.props.children.map((element, idx) => (
         <div
           onClick={() => { this.callback(idx); }}
