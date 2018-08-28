@@ -8,6 +8,8 @@
 
 ### 组件化进程
 
+![st](./helpImg/my_music_library.png)
+
 * tabs组件化（通用组件）：
 
     Tabs：闭合标签的组件，可以指定默认展示项（defaultActiveKey），每个tabs的内含div就是一个子页。
