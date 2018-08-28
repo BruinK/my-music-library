@@ -24,6 +24,16 @@
 
     回调函数：onChange函数，打印选中项的key
 
+* toolBar组件化（通用组件）：
+
+    toolBar:单标签组件，接收一个对象参数，包含两个数组
+    
+    ---> 一个列表为展示数组，每一项包含ID、name、incon、activeIcon
+
+    ---> 另一个为激活数组，包含激活状态的按钮的id，
+
+    如果是激活状态的tool则显示activeIcon，否则展示icon。
+
 * checkList组件化（复用组件）
 
     参数：要展示的数据源、选中列表、是否多选
