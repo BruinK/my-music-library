@@ -7,21 +7,29 @@ import * as TXT from '../../const/ActionTypes';
 
 export default class MyMusic extends Component {
   myListCallBack = key => {
-    console.log('​MyMusic -> key', key);
     const { actions } = this.props;
     actions.addOptionMusic(key, 1);
   }
   recommendListCallBack = key => {
-    console.log('​MyMusic -> key', key);
     const { actions } = this.props;
     actions.addOptionMusic(key, 2);
   }
 
   myListMultipleCallBack =key => {
     console.log('​MyMusic -> key', key);
+    const { actions, deleteList } = this.props;
+    // 1 代表myList order
+    if (deleteList && deleteList.length <= 5) {
+      actions.addDeleteId(key, 1);
+    }
   }
   recommendListMultipleCallBack =key => {
     console.log('​MyMusic -> key', key);
+    const { actions, deleteList } = this.props;
+    // 2 代表ComponentList order
+    if (deleteList && deleteList.length <= 5) {
+      actions.addDeleteId(key, 2);
+    }
   }
   checkBoxCallBack = key => {
     const { actions } = this.props;
@@ -34,21 +42,28 @@ export default class MyMusic extends Component {
   }
 
   showCheckList =type => {
-    const { myList, recommendList, showUi } = this.props;
-    if (type === 'M') {
+    const {
+      myList, recommendList, showUi, deleteList
+    } = this.props;
+    if (type === 'M' && deleteList) {
       if (showUi.isMultiple === 0) {
-        return <CheckList dataSource={myList} startOrder={0} onChange={this.myListCallBack} />;
+        return <CheckList dataSource={myList} onChange={this.myListCallBack} />;
       }
       if (showUi.isMultiple === 1) {
-        return <CheckList dataSource={myList} multiple startOrder={0} onChange={this.myListMultipleCallBack} />;
+        return <CheckList dataSource={myList} multiple deleteList={deleteList} onChange={this.myListMultipleCallBack} />;
       }
     }
-    if (type === 'R') {
+    if (type === 'R' && deleteList) {
       if (showUi.isMultiple === 0) {
-        return <CheckList dataSource={recommendList} startOrder={0} onChange={this.recommendListCallBack} />;
+        return <CheckList dataSource={recommendList} onChange={this.recommendListCallBack} />;
       }
       if (showUi.isMultiple === 1) {
-        return <CheckList dataSource={recommendList} multiple startOrder={0} onChange={this.recommendListMultipleCallBack} />;
+        return (<CheckList
+          dataSource={recommendList}
+          multiple
+          deleteList={deleteList}
+          onChange={this.recommendListMultipleCallBack}
+        />);
       }
     }
     return null;

@@ -8,6 +8,34 @@ export function showToolBar() {
   };
 }
 
+export function isShowTips(mark, data) {
+  return {
+    type: ActionTypes.ISSHOWTIPS,
+    data,
+    mark
+  };
+}
+
+export function deleteMusic() {
+  return {
+    type: ActionTypes.DELETEMUSIC
+  };
+}
+export function addDeleteId(id, kind) {
+  return {
+    type: ActionTypes.ADDDELETEID,
+    id,
+    kind
+  };
+}
+export function reName(data, id) {
+  return {
+    type: ActionTypes.RENAME,
+    data,
+    id
+  };
+}
+
 export function changeMultipleMark(kind) {
   return {
     type: ActionTypes.CHANGEMULTIPLEMARK,

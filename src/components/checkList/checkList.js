@@ -5,16 +5,34 @@ export default class CheckList extends Component {
   constructor() {
     super();
     this.state = {
-      order: 1,
       currentIndex: -1,
-      checked: []
+      checked: [],
+      len: 1
     };
   }
-  componentDidMount() {
-    console.log('​CheckList -> componentDidMount -> componentDidMount');
-    this.setState({
-      order: parseInt(this.props.startOrder, 10)
-    });
+  componentWillMount() {
+    const { deleteList } = this.props;
+    if (deleteList !== undefined) {
+      this.setState({
+        len: deleteList.length + 1
+      });
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    const { deleteList } = this.props;
+    if (nextProps.deleteList) {
+      if (deleteList !== undefined) {
+        if (nextProps.deleteList.length === 0) {
+          this.setState({
+            checked: [],
+            len: 1
+          });
+        }
+        this.setState({
+          len: nextProps.deleteList.length + 1
+        });
+      }
+    }
   }
   check_list_index = (index, type) => {
     // type = 1 ,多选； type = 2 ，单选
@@ -32,36 +50,54 @@ export default class CheckList extends Component {
   }
 
     callback = index => {
+      // const { deleteList } = this.props;
       if (this.props.onChange) {
         this.props.onChange(index);
         if (this.props.multiple) {
           const tempList = [...this.state.checked];
           const markTemp = tempList.indexOf(index);
-          if (markTemp === (-1)) {
-            tempList.push(index);
+          console.log('​CheckList -> this.state.len', this.state.len);
+          console.log('​CheckList -> tempList.length', tempList.length);
+          if (tempList.length < this.state.len) {
+            if (markTemp === (-1)) {
+              tempList.push(index);
+            } else {
+              tempList.splice(markTemp, 1);
+            }
+            this.setState({
+              currentIndex: index,
+              checked: [...tempList]
+            });
+          } else if (tempList.length === this.state.len) {
+            if (markTemp !== (-1)) {
+              tempList.splice(markTemp, 1);
+              this.setState({
+                checked: [...tempList]
+              });
+            }
           } else {
-            tempList.splice(markTemp, 1);
+            alert('最多选5首');
           }
-          this.setState({
-            currentIndex: index,
-            checked: [...tempList]
-          });
         } else {
           this.setState({
-            currentIndex: index,
-            checked: [index]
+            currentIndex: index
           });
         }
       }
     }
-    isMultiple = index => {
+    isMultiple = (index, item) => {
       if (this.props.multiple) {
         // 下标加一，方便显示下标
-        const orederTemp = this.state.checked.indexOf(index) + 1;
-        return (
-          <span className={this.check_list_index(index, 1)}>
-            {orederTemp === 0 ? null : orederTemp + this.state.order}
-          </span>);
+        const { deleteList } = this.props;
+        const orederTemp = deleteList.indexOf(item.id);
+        // const orederTemp = this.state.checked.indexOf(index) + 1;
+        if (orederTemp !== -1) {
+          return (
+            <span className={this.check_list_index(index, 1)}>
+              {orederTemp + 1}
+            </span>);
+        }
+        return <span className="multiplePoint" />;
       }
       return <span className={this.check_list_index(index, 2)} />;
     }
@@ -73,7 +109,7 @@ export default class CheckList extends Component {
       return dataSource.map((item, idx) => (
         <div className="checkListItem" onClick={() => { this.callback(idx); }} key={idx}>
           {
-            this.isMultiple(idx)
+            this.isMultiple(idx, item)
           }
           <div className="checkListContent">
             {item.name}

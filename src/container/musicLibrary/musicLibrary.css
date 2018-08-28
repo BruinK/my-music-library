@@ -1,5 +1,5 @@
 .App {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     overflow: hidden;
 }
@@ -7,5 +7,115 @@
 .App .header {
     width: 100%;
     height: 46px;
-    /* background: #bbb; */
+    /* position: fixed; */
+}
+.App .tipsBox-true {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    animation: tohide-true 3s ease;
+    animation-fill-mode: forwards;
+    -webkit-animation: tohide-true 5s ease;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.App .tipsBox-true .tipsContent-true {
+    height: auto;
+    width: auto;
+    bottom: 70px;
+    font-size: 18px;
+    display: inline-block;
+    line-height: 30px;
+    padding: 0 10px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 8px;
+}
+@keyframes tohide-true {
+    0% {
+        bottom: -30px;
+        opacity: 0;
+    }
+    5% {
+        bottom: 160px;
+        opacity: 1;
+    }
+    10% {
+        bottom: 160px;
+        opacity: 1;
+    }
+    90% {
+        bottom: 160px;
+        opacity: 1;
+    }
+    95% {
+        bottom: 160px;
+        opacity: 0;
+    }
+    100% {
+        bottom: -30px;
+        opacity: 0;
+    }
+}
+
+.App .tipsBox-false {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    animation: tohide-false 3s ease;
+    animation-fill-mode: forwards;
+    -webkit-animation: tohide-false 5s ease;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.App .tipsBox-false .tipsContent-false {
+    height: auto;
+    width: auto;
+    bottom: 70px;
+    font-size: 18px;
+    display: inline-block;
+    line-height: 30px;
+    padding: 0 10px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 8px;
+}
+
+@keyframes tohide-false {
+    0% {
+        bottom: -30px;
+        opacity: 0;
+    }
+    5% {
+        bottom: 160px;
+        opacity: 1;
+    }
+    10% {
+        bottom: 160px;
+        opacity: 1;
+    }
+    90% {
+        bottom: 160px;
+        opacity: 1;
+    }
+    95% {
+        bottom: 160px;
+        opacity: 0;
+    }
+    100% {
+        bottom: -30px;
+        opacity: 0;
+    }
 }

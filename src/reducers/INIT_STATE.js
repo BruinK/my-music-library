@@ -12,12 +12,15 @@ export const dataList = {
 
   recommendList: [],
   recommendListIdx: [],
-  activeToolList: []
+  activeToolList: [],
 
+  deleteList: []
 };
 export const uiList = {
   currentToolId: -1,
   isMultiple: 0,
+  isShowTips: false,
+  tipsContent: '',
   ui: [
     {
       id: 1, name: '播放', activeIcon: [IMG.playActive], grayIcon: [IMG.playGray]

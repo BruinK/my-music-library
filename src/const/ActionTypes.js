@@ -14,11 +14,15 @@ export const STORECUTINFO = 'STORECUTINFO';
 
 // option music list
 export const ADDOPTIONMUSIC = 'ADDOPTIONMUSIC';
-
 export const ADDTOOLID = 'ADDTOOLID';
+
+export const ADDDELETEID = 'ADDDELETEID';
+export const RENAME = 'RENAME';
+export const DELETEMUSIC = 'DELETEMUSIC';
 
 // ui
 export const CHANGEMULTIPLEMARK = 'CHANGEMULTIPLEMARK';
+export const ISSHOWTIPS = 'ISSHOWTIPS';
 
 // my music
 export const MYMUSICTITLE = '我的音乐';
@@ -37,3 +41,7 @@ export const CUTSTART = '标记起点';
 export const CUTEND = '标记终点';
 export const CLEARMARK = '清除';
 export const FINISHMARK = '完成';
+
+// play musci
+export const CLOSEPLAY = '关闭';
+

@@ -1,8 +1,8 @@
 # My music Library
 
-### TODO 中间件拉取数据
+### 中间件拉取数据
 
-### DONE 组件化进程
+### 组件化进程
 
 * tabs组件化：
 
@@ -14,6 +14,8 @@
 
 * checkBox组件化
 
+* checkList组件化
+    state更新的不及时，this.props传递的参数是上一次props的参数。 》 使用componentWillReceiveProps( nextProps )解决
 
 ## 工作过程：
     单选
@@ -35,3 +37,26 @@
 
 * 阻止事件冒泡，使得点击改变进度条和拖拽改变进度条互不干扰
     e.stopPropagation();
+
+
+
+## 疑问
+* 更新state之前发起一个action更改store，
+
+
+## 工作流：
+
+立项：需求提出（可行性分析）ITO
+
+需求分析： 执行和提出进行需求确认
+
+计划： 拆解前后端及各部分工作
+
+执行： coding
+
+check： ！！！！
+
+     达到一个里程碑进行立即check，team中按天为单位check，个人因该会以更小的单位进行check；
+     > 闭环思维
+
+> 以始为终，目标导向

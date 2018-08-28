@@ -1,0 +1,73 @@
+.maskAlert {
+     height: 100vh;
+     width: 100vw;
+     position: absolute;
+     left: 0;
+     top: 0;
+     background:rgba(0, 0, 0, 0.5);
+}
+.maskAlert .alertBox {
+    height: 190px;
+    width: 280px;
+    position: relative;
+    margin-left: 50%;
+    margin-top: 50%;
+    left: -140px;
+    top: 70px;
+    background: #fff;
+    font-family:PingFangSC-Semibold;
+    border-radius: 10px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
+}
+
+.maskAlert .alertBox .alertTitle {
+    font-size:22px;
+    margin:0 15px;
+    text-align: center;
+    color:black;
+    font-weight: bold;
+}
+.maskAlert .alertBox .alertTitle .selectId {
+    display: block;
+    font-size:13px;
+}
+
+.maskAlert .alertBox .alertContent {
+    width: 250px;
+    height: 30px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    align-self: center;
+    font-size: 18px;
+    text-indent: 5px;
+    background: #eee;
+}
+.maskAlert .alertBox .btnBox {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.maskAlert .alertBox .btnBox .option{
+    width: 100px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 18px;
+    color: #aaa;
+}
+
+.maskAlert .alertBox .btnBox .mainOption {
+    width: 120px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    background: #ff2064;
+    border-radius: 22px;
+}

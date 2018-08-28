@@ -21,6 +21,7 @@ export default class CutTool extends Component {
   }
   componentWillMount() {
     const { myList, id } = this.props;
+    console.log('​CutTool -> componentWillMount -> this.props', this.props.type);
     const au = myList;
     const endTemp = au.emt === 0 ? au.du : au.emt;
     this.setState({
@@ -59,6 +60,7 @@ export default class CutTool extends Component {
   }
 
   controlAudio = (type, value) => {
+    const { actions } = this.props;
     if (this.getAudio) {
       switch (type) {
         case 'play': {
@@ -76,7 +78,7 @@ export default class CutTool extends Component {
         }
         case 'cutStart': {
           if (this.state.allTime - value < 10) {
-            alert('截取时间要求大于10s');
+            actions.isShowTips(true, '截取时间要求大于10s');
             break;
           }
           this.leftMark.style.display = 'block';
@@ -97,9 +99,11 @@ export default class CutTool extends Component {
         }
         case 'cutEnd': {
           if (this.state.cutStart === 0) {
-            window.alert('请先标记起点');
+            actions.isShowTips(true, '请先标记起点');
           } else if (value - this.state.cutStart < 10) {
-            window.alert('不能小于10S');
+            actions.isShowTips(true, '截取时间要求大于10s');
+            // actions.isShowTips();
+            // window.alert('不能小于10S');
           } else {
             this.rightMark.style.display = 'block';
             this.rightMark.style.marginLeft = this.getProcessLeft(value - this.state.cutStart);
@@ -129,7 +133,7 @@ export default class CutTool extends Component {
         currentTime: this.state.cutStart
       });
     }
-    if (this.getAudio.currentTime - this.state.currentTime > 0.01) {
+    if (this.getAudio.currentTime - this.state.currentTime > 0.5) {
       this.sliderUp(this.getAudio.currentTime);
       this.setState({
         currentTime: this.getAudio.currentTime
@@ -297,43 +301,70 @@ export default class CutTool extends Component {
       }
     }
 
+    isShowBtn =() => {
+      if (this.props.type === 'CUT') {
+        return (
+          <div className="btnBox" >
+            <div className="btn">
+              {
+                  this.showBtn('STA')
+                }
+              <span>{TXT.CUTSTART}</span>
+              <span className="cutTime">{this.millisecondToDate(this.state.cutStart)}</span>
+            </div>
+            <div className="btn">
+              {
+                  this.showBtn('CLC')
+                }
+              <span>{TXT.CLEARMARK}</span>
+            </div>
+            <div className="btn">
+              {
+                  this.showBtn('END')
+                }
+              <span>{TXT.CUTEND}</span>
+              <span className="cutTime">
+                {this.millisecondToDate(this.state.cutEnd)}
+              </span>
+            </div>
+          </div>
+        );
+      }
+      if (this.props.type === 'PLAY') {
+        return (
+          <div className="playTitle">
+            {this.props.myList.name}
+          </div>
+        );
+      }
+      return null;
+    }
     closeCutTool=() => {
       const { actions } = this.props;
       this.getAudio.pause();
       if (this.getAudio.paused) {
         actions.addToolId(-1);
+        actions.storeCutInfo(this.state.cutStart, this.state.cutEnd, this.state.id);
+        actions.isShowTips(false);
       }
-      actions.storeCutInfo(this.state.cutStart, this.state.cutEnd, this.state.id);
     }
+    choseCloseTip = () => {
+      if (this.props.type === 'CUT') {
+        return TXT.FINISHMARK;
+      }
 
+      if (this.props.type === 'PLAY') {
+        return TXT.CLOSEPLAY;
+      }
+      return null;
+    }
     render() {
       return (
         <div className="cutMask" >
           <div className="cutPanel">
-            <div className="btnBox">
-              <div className="btn">
-                {
-                  this.showBtn('STA')
-                }
-                <span>{TXT.CUTSTART}</span>
-                <span className="cutTime">{this.millisecondToDate(this.state.cutStart)}</span>
-              </div>
-              <div className="btn">
-                {
-                  this.showBtn('CLC')
-                }
-                <span>{TXT.CLEARMARK}</span>
-              </div>
-              <div className="btn">
-                {
-                  this.showBtn('END')
-                }
-                <span>{TXT.CUTEND}</span>
-                <span className="cutTime">
-                  {this.millisecondToDate(this.state.cutEnd)}
-                </span>
-              </div>
-            </div>
+            {
+              this.isShowBtn()
+            }
             <div className="controlBox">
               <audio
                 ref={audio => { this.getAudio = audio; }}
@@ -350,63 +381,34 @@ export default class CutTool extends Component {
               <div
                 ref={p => { this.process = p; }}
                 onTouchStart={this.handelProcessTouch}
-                style={{
-                        width: '275px',
-                        height: '6px',
-                        borderRadius: '3px',
-                        background: '#e5e5e5'
-                      }}
+                className="process"
+                style={{ width: '275px' }}
               >
                 <div
                   ref={p => { this.pContent = p; }}
-                  style={{
-                      width: 0,
-                      height: '6px',
-                      position: 'absolute',
-                      borderRadius: '3px',
-                      background: '#ff2064'
-                      }}
+                  className="pContent"
+                  style={{ width: 0 }}
                 >
                   <div
                     ref={p => { this.slider = p; }}
+                    className="slider"
                     onTouchStart={this.handelTouchStart}
                     onTouchMove={this.handelTouchMove}
                     onTouchEnd={this.handelTouchEnd}
-                    style={{
-                      width: '15px',
-                      height: '15px',
-                      position: 'absolute',
-                      marginTop: '-5px',
-                      border: '1px solid #bbb',
-                      borderRadius: '50%',
-                      background: '#fff',
-                      zIndex: '3'
-                      }}
+                    style={{ width: '15px' }}
                   />
                   <img
                     ref={p => { this.leftMark = p; }}
+                    className="leftMark"
                     src={IMG.cutStart}
-                    style={{
-                      height: 'auto',
-                      width: '10px',
-                      position: 'absolute',
-                      marginTop: '-11px',
-                      display: 'none',
-                      zIndex: '1'
-                    }}
+                    style={{ width: '10px' }}
                     alt="cut start"
                   />
                   <img
                     ref={p => { this.rightMark = p; }}
+                    className="rightMark"
                     src={IMG.cutFinish}
-                    style={{
-                      height: 'auto',
-                      width: '10px',
-                      position: 'absolute',
-                      marginTop: '-11px',
-                      display: 'none',
-                      zIndex: '1'
-                    }}
+                    style={{ width: '10px' }}
                     alt="cut finish"
                   />
                 </div>
@@ -421,7 +423,9 @@ export default class CutTool extends Component {
               </span>
             </div>
             <div className="cutFinish" onClick={this.closeCutTool}>
-              {TXT.FINISHMARK}
+              {
+                  this.choseCloseTip()
+                }
             </div>
           </div>
         </div>

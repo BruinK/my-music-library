@@ -8,7 +8,8 @@ export default class Header extends Component {
       console.log('返回影集制作');
     }
     finishSelect=() => {
-      console.log('点击完成');
+      const { onClick } = this.props;
+      onClick();
     }
     showTitle=() => {
       const { personInfo } = this.props;

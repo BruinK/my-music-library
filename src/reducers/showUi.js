@@ -20,8 +20,14 @@ export default function showUi(state = uiList, action) {
         isMultiple: action.kind
       };
     }
+    case ActionTypes.ISSHOWTIPS: {
+      return {
+        ...state,
+        isShowTips: action.mark,
+        tipsContent: action.data
+      };
+    }
     default:
-      console.log('​showUi -> state', state);
       return state;
   }
 }
